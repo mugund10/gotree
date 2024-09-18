@@ -14,6 +14,15 @@ go build -o gotree main.go
 go install github.com/mugund10/gotree@latest
 ```
 
+### adding to path
+```bash
+source ~/.bashrc
+//i included my path here dont copy it, just add your path (use pwd command on linux to get the path)
+export PATH=$PATH:/home/ubuntu/gotree 
+source ~/.bashrc 
+```
+now you can access it by gotree on anywhere
+
 ## usage 
 
 ```bash
