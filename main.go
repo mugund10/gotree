@@ -30,7 +30,7 @@ func Walk(fsys fs.FS, name, inden string, ds, fil *int) error {
 
 	dirs, err := fs.ReadDir(fsys, name)
 	if err != nil {
-		//permission error
+		//permission errorgit status
 	}
 
 	inden1 := inden + "│     "
