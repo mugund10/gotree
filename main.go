@@ -5,6 +5,7 @@ import (
 	"io/fs"
 	"os"
 	"path"
+	"strings"
 )
 
 func main() {
@@ -39,6 +40,7 @@ func Walk(fsys fs.FS, name, inden string, ds, fil *int) error {
 
 		newname := path.Join(name, dir.Name())
 		if key == len(dirs)-1 {
+			if !strings.HasPrefix(dir.Name(), ".") {
 			if dir.IsDir() {
 				*ds++
 			} else {
@@ -46,15 +48,18 @@ func Walk(fsys fs.FS, name, inden string, ds, fil *int) error {
 			}
 			fmt.Printf("%v└──── %s \n", inden, dir.Name())
 			Walk(fsys, newname, inden2, ds, fil)
+		}
 
-		} else if dir.Name()[0] != '.' {
-			if dir.IsDir() {
-				*ds++
-			} else {
-				*fil++
+		} else {
+			if !strings.HasPrefix(dir.Name(), ".") {
+				if dir.IsDir() {
+					*ds++
+				} else {
+					*fil++
+				}
+				fmt.Printf("%v├──── %s \n", inden, dir.Name())
+				Walk(fsys, newname, inden1, ds, fil)
 			}
-			fmt.Printf("%v├──── %s \n", inden, dir.Name())
-			Walk(fsys, newname, inden1, ds, fil)
 		}
 	}
 	return nil
